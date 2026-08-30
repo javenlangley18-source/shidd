@@ -1,0 +1,33 @@
+name: Swift CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download and install Swift toolchain
+        run: |
+          set -euxo pipefail
+          SWIFT_VERSION="5.10.1"
+          SWIFT_URL="https://download.swift.org/swift-${SWIFT_VERSION}-release/ubuntu2204/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE-ubuntu22.04.tar.gz"
+          TMP="$RUNNER_TEMP/swift.tar.gz"
+          curl -fSL "$SWIFT_URL" -o "$TMP"
+          sudo tar -xzf "$TMP" -C /opt
+          DIR=$(tar -tzf "$TMP" | head -1 | cut -f1 -d"/")
+          sudo ln -sfn "/opt/$DIR" /opt/swift
+          echo "PATH=/opt/swift/usr/bin:$PATH" >> "$GITHUB_ENV"
+
+      - name: Show swift version
+        run: swift --version
+
+      - name: Run tests
+        run: swift test
