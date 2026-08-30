@@ -1,3 +1,8 @@
+#if os(Linux)
+import Glibc
+#else
+import Darwin
+#endif
 import Foundation
 import PrivacyShieldCore
 
@@ -8,7 +13,7 @@ let ports = [8080, 9090]
 
 func startListener(on port: Int) {
     DispatchQueue.global().async {
-        let sock = socket(AF_INET, SOCK_STREAM, 0)
+        let sock = socket(AF_INET, Int32(SOCK_STREAM), 0)
         guard sock >= 0 else { fatalError("socket() failed") }
         var opt: Int32 = 1
         setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, socklen_t(MemoryLayout<Int32>.size))
@@ -61,59 +66,63 @@ func readLine(fd: Int32) -> String? {
 
 func handleClient(fd: Int32) {
     guard let line = readLine(fd: fd) else { return }
+    Task {
+        var cmdLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
+        let envSecret = ProcessInfo.processInfo.environment["PRIVACY_SHIELD_SECRET"]?.trimmingCharacters(in: .whitespacesAndNewlines)
+        var actorUserId: String? = nil
 
-    // If PRIVACY_SHIELD_SECRET is set, require each command to be prefixed with the secret
-    // e.g. "<SECRET> LIST_REQUESTS". If not set, no authentication is required.
-    let envSecret = ProcessInfo.processInfo.environment["PRIVACY_SHIELD_SECRET"]?.trimmingCharacters(in: .whitespacesAndNewlines)
-    var cmdLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-    var actorUserId: String? = nil
-    if let secret = envSecret, !secret.isEmpty {
-        if cmdLine == secret {
-            let resp = "ERR no command provided after secret\n"
-            _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
-            return
-        }
-        if cmdLine.hasPrefix(secret + " ") {
-            // Admin command authenticated
-            cmdLine = String(cmdLine.dropFirst(secret.count + 1))
-            actorUserId = "admin"
+        if let secret = envSecret, !secret.isEmpty {
+            if cmdLine == secret {
+                let resp = "ERR no command provided after secret\n"
+                _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                return
+            }
+            if cmdLine.hasPrefix(secret + " ") {
+                // Admin command authenticated
+                cmdLine = String(cmdLine.dropFirst(secret.count + 1))
+                actorUserId = "admin"
+            } else {
+                // Try token auth: first token word is token
+                let firstWord = cmdLine.split(separator: " ", maxSplits: 1).first.map(String.init) ?? ""
+                if !firstWord.isEmpty {
+                    if let user = await TokenManager.shared.validate(firstWord) {
+                        // strip token from line
+                        if cmdLine.count > firstWord.count + 1 {
+                            cmdLine = String(cmdLine.dropFirst(firstWord.count + 1))
+                        } else {
+                            let resp = "ERR no command provided after token\n"
+                            _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                            return
+                        }
+                        actorUserId = user
+                    } else {
+                        let resp = "ERR auth failed\n"
+                        _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                        return
+                    }
+                } else {
+                    let resp = "ERR auth failed\n"
+                    _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                    return
+                }
+            }
         } else {
-            // Try token auth: first token word is token
+            // No env secret configured: treat first word as token and attempt validation (optional)
             let firstWord = cmdLine.split(separator: " ", maxSplits: 1).first.map(String.init) ?? ""
-            if let user = await TokenManager.shared.validate(firstWord) {
-                // strip token from line
+            if !firstWord.isEmpty, let user = await TokenManager.shared.validate(firstWord) {
                 if cmdLine.count > firstWord.count + 1 {
                     cmdLine = String(cmdLine.dropFirst(firstWord.count + 1))
+                    actorUserId = user
                 } else {
                     let resp = "ERR no command provided after token\n"
                     _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
                     return
                 }
-                actorUserId = user
-            } else {
-                let resp = "ERR auth failed\n"
-                _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
-                return
             }
         }
-    } else {
-        // No env secret configured: treat first word as token and attempt validation (optional)
-        let firstWord = cmdLine.split(separator: " ", maxSplits: 1).first.map(String.init) ?? ""
-        if let user = await TokenManager.shared.validate(firstWord) {
-            if cmdLine.count > firstWord.count + 1 {
-                cmdLine = String(cmdLine.dropFirst(firstWord.count + 1))
-                actorUserId = user
-            } else {
-                let resp = "ERR no command provided after token\n"
-                _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
-                return
-            }
-        }
-    }
 
-    let parts = cmdLine.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: false).map(String.init)
-    let cmd = parts.first ?? ""
-    Task {
+        let parts = cmdLine.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: false).map(String.init)
+        let cmd = parts.first ?? ""
         var response = ""
         switch cmd {
         case "LIST_REQUESTS":

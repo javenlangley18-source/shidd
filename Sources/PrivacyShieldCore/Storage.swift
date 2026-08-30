@@ -26,12 +26,20 @@ public final class Storage {
         let state: String
     }
 
-    private struct TokenRecord: Codable {
-        let token: String
-        let userId: String
-        let createdAt: TimeInterval
-        let expiresAt: TimeInterval?
-        let revoked: Bool
+    public struct TokenRecord: Codable {
+        public let token: String
+        public let userId: String
+        public let createdAt: TimeInterval
+        public let expiresAt: TimeInterval?
+        public let revoked: Bool
+
+        public init(token: String, userId: String, createdAt: TimeInterval, expiresAt: TimeInterval?, revoked: Bool) {
+            self.token = token
+            self.userId = userId
+            self.createdAt = createdAt
+            self.expiresAt = expiresAt
+            self.revoked = revoked
+        }
     }
 
     private init() {
