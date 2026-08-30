@@ -66,6 +66,7 @@ func handleClient(fd: Int32) {
     // e.g. "<SECRET> LIST_REQUESTS". If not set, no authentication is required.
     let envSecret = ProcessInfo.processInfo.environment["PRIVACY_SHIELD_SECRET"]?.trimmingCharacters(in: .whitespacesAndNewlines)
     var cmdLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
+    var actorUserId: String? = nil
     if let secret = envSecret, !secret.isEmpty {
         if cmdLine == secret {
             let resp = "ERR no command provided after secret\n"
@@ -73,11 +74,40 @@ func handleClient(fd: Int32) {
             return
         }
         if cmdLine.hasPrefix(secret + " ") {
+            // Admin command authenticated
             cmdLine = String(cmdLine.dropFirst(secret.count + 1))
+            actorUserId = "admin"
         } else {
-            let resp = "ERR auth failed\n"
-            _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
-            return
+            // Try token auth: first token word is token
+            let firstWord = cmdLine.split(separator: " ", maxSplits: 1).first.map(String.init) ?? ""
+            if let user = await TokenManager.shared.validate(firstWord) {
+                // strip token from line
+                if cmdLine.count > firstWord.count + 1 {
+                    cmdLine = String(cmdLine.dropFirst(firstWord.count + 1))
+                } else {
+                    let resp = "ERR no command provided after token\n"
+                    _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                    return
+                }
+                actorUserId = user
+            } else {
+                let resp = "ERR auth failed\n"
+                _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                return
+            }
+        }
+    } else {
+        // No env secret configured: treat first word as token and attempt validation (optional)
+        let firstWord = cmdLine.split(separator: " ", maxSplits: 1).first.map(String.init) ?? ""
+        if let user = await TokenManager.shared.validate(firstWord) {
+            if cmdLine.count > firstWord.count + 1 {
+                cmdLine = String(cmdLine.dropFirst(firstWord.count + 1))
+                actorUserId = user
+            } else {
+                let resp = "ERR no command provided after token\n"
+                _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+                return
+            }
         }
     }
 
@@ -92,6 +122,29 @@ func handleClient(fd: Int32) {
         case "LIST_AUDIT":
             let events = await AuditLog.shared.allEvents()
             if let data = try? JSONEncoder().encode(events), let s = String(data: data, encoding: .utf8) { response = s }
+        case "CREATE_TOKEN":
+            // Admin-only: CREATE_TOKEN <userId> <ttlSeconds|0 for none>
+            if actorUserId == "admin" {
+                if parts.count >= 3, let ttl = Int(parts[2]) {
+                    let userId = parts[1]
+                    let token = await TokenManager.shared.createToken(userId: userId, ttlSeconds: ttl == 0 ? nil : ttl)
+                    response = token.token
+                } else { response = "ERR args: CREATE_TOKEN <userId> <ttlSeconds|0>" }
+            } else { response = "ERR admin only" }
+        case "REVOKE_TOKEN":
+            // Admin-only: REVOKE_TOKEN <token>
+            if actorUserId == "admin" {
+                if parts.count >= 2 {
+                    let t = parts[1]
+                    let ok = await TokenManager.shared.revokeToken(t, actorId: "admin")
+                    response = ok ? "OK" : "ERR not found"
+                } else { response = "ERR args" }
+            } else { response = "ERR admin only" }
+        case "LIST_TOKENS":
+            if actorUserId == "admin" {
+                let tokens = await TokenManager.shared.listTokens()
+                if let data = try? JSONEncoder().encode(tokens), let s = String(data: data, encoding: .utf8) { response = s }
+            } else { response = "ERR admin only" }
         case "REQUEST_QUARANTINE":
             if parts.count >= 4 {
                 let resource = parts[1]
