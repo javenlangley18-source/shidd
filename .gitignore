@@ -1,0 +1,4 @@
+.build/
+*.sqlite
+*.db
+.DS_Store
