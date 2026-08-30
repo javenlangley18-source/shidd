@@ -16,7 +16,8 @@ func startListener(on port: Int) {
         var addr = sockaddr_in()
         addr.sin_family = sa_family_t(AF_INET)
         addr.sin_port = in_port_t(UInt16(port).bigEndian)
-        addr.sin_addr = in_addr(s_addr: in_addr_t(0))
+        // Bind to localhost for safety (only accessible from this machine)
+        addr.sin_addr = in_addr(s_addr: inet_addr("127.0.0.1"))
 
         let bindResult = withUnsafePointer(to: &addr) {
             $0.withMemoryRebound(to: sockaddr.self, capacity: 1) { ptr in
