@@ -27,8 +27,11 @@ final class AuditAndQuarantineTests: XCTestCase {
         let requester = "adminA"
         let approver = "adminB"
 
+        // Ensure single-approver threshold (default)
+        await qm.setApprovalThreshold(1, actorId: "system")
+
         let reqId = await qm.requestQuarantine(resourceId: "resource-123", requesterId: requester, justification: "Test purge")
-        var req = await qm.getRequest(reqId)
+        let req = await qm.getRequest(reqId)
         XCTAssertEqual(req?.state, .requested)
 
         let approved = await qm.approve(requestId: reqId, approverId: approver)
@@ -41,7 +44,7 @@ final class AuditAndQuarantineTests: XCTestCase {
         let marked = await qm.markReadyForDeletion(requestId: reqId, actorId: approver)
         XCTAssertEqual(marked?.state, .readyForDeletion)
 
-        // Restore should not change state from readyForDeletion in this simple implementation
+        // Restore should not work once readyForDeletion
         let restored = await qm.restore(requestId: reqId, actorId: approver)
         XCTAssertNil(restored) // restore only works when state == .quarantined
 
@@ -52,5 +55,27 @@ final class AuditAndQuarantineTests: XCTestCase {
         XCTAssertTrue(actions.contains("quarantine_approved"))
         XCTAssertTrue(actions.contains("quarantine_applied"))
         XCTAssertTrue(actions.contains("quarantine_ready_for_deletion"))
+    }
+
+    func testMultiApproverThreshold() async throws {
+        let qm = QuarantineManager.shared
+        let requester = "adminA"
+        let approver1 = "adminB"
+        let approver2 = "adminC"
+
+        // Set threshold to 2
+        await qm.setApprovalThreshold(2, actorId: "system")
+
+        let reqId = await qm.requestQuarantine(resourceId: "resource-456", requesterId: requester, justification: "Multi-approver test")
+
+        // First approval should not reach threshold
+        let afterFirst = await qm.approve(requestId: reqId, approverId: approver1)
+        XCTAssertEqual(afterFirst?.state, .requested)
+        XCTAssertTrue(afterFirst?.approvals.contains(approver1) ?? false)
+
+        // Second approval should mark approved
+        let afterSecond = await qm.approve(requestId: reqId, approverId: approver2)
+        XCTAssertEqual(afterSecond?.state, .approved)
+        XCTAssertTrue(afterSecond?.approvals.contains(approver2) ?? false)
     }
 }

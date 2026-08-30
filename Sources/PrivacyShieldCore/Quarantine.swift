@@ -33,7 +33,18 @@ public actor QuarantineManager: Sendable {
 
     private var requestsById: [UUID: QuarantineRequest] = [:]
 
+    /// Approval threshold (number of distinct approvers required before a request becomes approved).
+    /// Default is 1 (single-approver). Can be adjusted via setApprovalThreshold by an admin.
+    private var approvalThreshold: Int = 1
+
     public init() {}
+
+    /// Admin-callable: set the number of approvers required for approval. Value must be >= 1.
+    public func setApprovalThreshold(_ n: Int, actorId: String) async {
+        guard n >= 1 else { return }
+        approvalThreshold = n
+        await AuditLog.shared.record(actor: actorId, action: "set_approval_threshold", target: nil, details: "threshold=\(n)")
+    }
 
     /// Request quarantine for a resource. Returns the request id.
     public func requestQuarantine(resourceId: String, requesterId: String, justification: String) async -> UUID {
@@ -45,17 +56,24 @@ public actor QuarantineManager: Sendable {
     }
 
     /// Approve a pending quarantine request. Returns the updated request if successful.
-    /// For safety this implementation requires at least one approver; to enable a 2-person rule
-    /// change the approval threshold in future.
+    /// Approval only transitions to `.approved` when the number of distinct approvers >= approvalThreshold.
     public func approve(requestId: UUID, approverId: String) async -> QuarantineRequest? {
         guard var req = requestsById[requestId] else { return nil }
         guard req.state == .requested || req.state == .approved else { return req }
         if !req.approvals.contains(approverId) {
             req.approvals.append(approverId)
         }
-        req.state = .approved
+        // Only mark as approved when approvals reach threshold
+        if req.approvals.count >= approvalThreshold {
+            req.state = .approved
+        } else {
+            req.state = .requested
+        }
         requestsById[requestId] = req
-        await AuditLog.shared.record(actor: approverId, action: "quarantine_approved", target: req.resourceId, details: "approvals=\(req.approvals)")
+        await AuditLog.shared.record(actor: approverId, action: "quarantine_approval_added", target: req.resourceId, details: "approvals=\(req.approvals)")
+        if req.state == .approved {
+            await AuditLog.shared.record(actor: approverId, action: "quarantine_approved", target: req.resourceId, details: "approvals=\(req.approvals)")
+        }
         return req
     }
 
