@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AuditEvent: Identifiable, Equatable, Sendable {
+public struct AuditEvent: Identifiable, Equatable, Sendable, Codable {
     public let id: UUID
     public let timestamp: Date
     public let actor: String
@@ -15,6 +15,10 @@ public struct AuditEvent: Identifiable, Equatable, Sendable {
         self.action = action
         self.target = target
         self.details = details
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id, timestamp, actor, action, target, details
     }
 }
 

@@ -8,7 +8,7 @@ public enum QuarantineState: String, Sendable {
     case readyForDeletion
 }
 
-public struct QuarantineRequest: Identifiable, Sendable, Equatable {
+public struct QuarantineRequest: Identifiable, Sendable, Equatable, Codable {
     public let id: UUID
     public let resourceId: String
     public let requesterId: String
@@ -17,14 +17,48 @@ public struct QuarantineRequest: Identifiable, Sendable, Equatable {
     public var approvals: [String]
     public var state: QuarantineState
 
-    public init(resourceId: String, requesterId: String, justification: String, requestedAt: Date = Date(), approvals: [String] = [], state: QuarantineState = .requested) {
-        self.id = UUID()
+    public init(id: UUID = UUID(), resourceId: String, requesterId: String, justification: String, requestedAt: Date = Date(), approvals: [String] = [], state: QuarantineState = .requested) {
+        self.id = id
         self.resourceId = resourceId
         self.requesterId = requesterId
         self.justification = justification
         self.requestedAt = requestedAt
         self.approvals = approvals
         self.state = state
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id, resourceId, requesterId, justification, requestedAt, approvals, state
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let idString = try container.decodeIfPresent(String.self, forKey: .id)
+        if let idString = idString, let uuid = UUID(uuidString: idString) {
+            self.id = uuid
+        } else if let uuid = try? container.decodeIfPresent(UUID.self, forKey: .id) {
+            self.id = uuid ?? UUID()
+        } else {
+            self.id = UUID()
+        }
+        self.resourceId = try container.decode(String.self, forKey: .resourceId)
+        self.requesterId = try container.decode(String.self, forKey: .requesterId)
+        self.justification = try container.decode(String.self, forKey: .justification)
+        let ts = try container.decode(TimeInterval.self, forKey: .requestedAt)
+        self.requestedAt = Date(timeIntervalSince1970: ts)
+        self.approvals = try container.decode([String].self, forKey: .approvals)
+        self.state = QuarantineState(rawValue: try container.decode(String.self, forKey: .state)) ?? .requested
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id.uuidString, forKey: .id)
+        try container.encode(resourceId, forKey: .resourceId)
+        try container.encode(requesterId, forKey: .requesterId)
+        try container.encode(justification, forKey: .justification)
+        try container.encode(requestedAt.timeIntervalSince1970, forKey: .requestedAt)
+        try container.encode(approvals, forKey: .approvals)
+        try container.encode(state.rawValue, forKey: .state)
     }
 }
 

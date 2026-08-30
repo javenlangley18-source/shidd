@@ -13,7 +13,7 @@ let ports = [8080, 9090]
 
 func startListener(on port: Int) {
     DispatchQueue.global().async {
-        let sock = socket(AF_INET, Int32(SOCK_STREAM), 0)
+        let sock = socket(AF_INET, Int32(1), 0) // SOCK_STREAM == 1
         guard sock >= 0 else { fatalError("socket() failed") }
         var opt: Int32 = 1
         setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, socklen_t(MemoryLayout<Int32>.size))
