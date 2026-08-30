@@ -51,6 +51,7 @@ public actor QuarantineManager: Sendable {
         var req = QuarantineRequest(resourceId: resourceId, requesterId: requesterId, justification: justification)
         req.state = .requested
         requestsById[req.id] = req
+        Storage.shared.upsertQuarantineRequest(req)
         await AuditLog.shared.record(actor: requesterId, action: "quarantine_requested", target: resourceId, details: justification)
         return req.id
     }
@@ -70,6 +71,7 @@ public actor QuarantineManager: Sendable {
             req.state = .requested
         }
         requestsById[requestId] = req
+        Storage.shared.upsertQuarantineRequest(req)
         await AuditLog.shared.record(actor: approverId, action: "quarantine_approval_added", target: req.resourceId, details: "approvals=\(req.approvals)")
         if req.state == .approved {
             await AuditLog.shared.record(actor: approverId, action: "quarantine_approved", target: req.resourceId, details: "approvals=\(req.approvals)")
@@ -83,6 +85,7 @@ public actor QuarantineManager: Sendable {
         guard req.state == .approved else { return req }
         req.state = .quarantined
         requestsById[requestId] = req
+        Storage.shared.upsertQuarantineRequest(req)
         await AuditLog.shared.record(actor: actorId, action: "quarantine_applied", target: req.resourceId, details: nil)
         return req
     }
@@ -92,6 +95,7 @@ public actor QuarantineManager: Sendable {
         guard var req = requestsById[requestId], req.state == .quarantined else { return nil }
         req.state = .restored
         requestsById[requestId] = req
+        Storage.shared.upsertQuarantineRequest(req)
         await AuditLog.shared.record(actor: actorId, action: "quarantine_restored", target: req.resourceId, details: nil)
         return req
     }
@@ -105,15 +109,19 @@ public actor QuarantineManager: Sendable {
         guard req.state == .quarantined || req.state == .approved else { return req }
         req.state = .readyForDeletion
         requestsById[requestId] = req
+        Storage.shared.upsertQuarantineRequest(req)
         await AuditLog.shared.record(actor: actorId, action: "quarantine_ready_for_deletion", target: req.resourceId, details: nil)
         return req
     }
 
     public func getRequest(_ id: UUID) -> QuarantineRequest? {
-        requestsById[id]
+        // Try in-memory first, then storage
+        if let inMem = requestsById[id] { return inMem }
+        return Storage.shared.fetchQuarantineRequest(id: id)
     }
 
     public func listRequests() -> [QuarantineRequest] {
-        Array(requestsById.values)
+        // Combine in-memory and persisted, but prefer persisted list which is authoritative
+        return Storage.shared.listQuarantineRequests()
     }
 }

@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/master.swiftdeps"
+  },
+  "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift": {
+    "dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.d",
+    "object": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.swift.o",
+    "swiftmodule": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests~partial.swiftmodule",
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.swiftdeps"
+  },
+  "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift": {
+    "dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.d",
+    "object": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.swift.o",
+    "swiftmodule": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests~partial.swiftmodule",
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.swiftdeps"
+  }
+}

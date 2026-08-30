@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/master.swiftdeps"
+  },
+  "/workspaces/shidd/Tests/PrivacyShieldCoreTests/AuditAndQuarantineTests.swift": {
+    "dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.d",
+    "object": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swift.o",
+    "swiftmodule": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests~partial.swiftmodule",
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swiftdeps"
+  },
+  "/workspaces/shidd/Tests/PrivacyShieldCoreTests/PrivacyShieldCoreTests.swift": {
+    "dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.d",
+    "object": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swift.o",
+    "swiftmodule": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests~partial.swiftmodule",
+    "swift-dependencies": "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swiftdeps"
+  }
+}

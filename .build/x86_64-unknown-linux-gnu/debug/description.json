@@ -1,0 +1,740 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.xctest",
+      "packagePath" : "/workspaces/shidd",
+      "productName" : "PrivacyShieldPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+    "PrivacyShieldPackageDiscoveredTests"
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.PrivacyShieldCore-debug.module" : {
+      "executable" : "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "fileList" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/sources",
+      "importPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/AuditLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/PermissionAudit.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/Quarantine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/TrackerBlocker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PrivacyShieldCore",
+      "moduleOutputPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.swiftmodule",
+      "objects" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/AuditLog.swift.o",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/PermissionAudit.swift.o",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/Quarantine.swift.o",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/TrackerBlocker.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-unknown-linux-gnu",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j2",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-g",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "shidd",
+        "-Xcc",
+        "-fno-omit-frame-pointer"
+      ],
+      "outputFileMapPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/AuditLog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/PermissionAudit.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/Quarantine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/TrackerBlocker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/workspaces/shidd/Sources/PrivacyShieldCore/AuditLog.swift",
+        "/workspaces/shidd/Sources/PrivacyShieldCore/PermissionAudit.swift",
+        "/workspaces/shidd/Sources/PrivacyShieldCore/Quarantine.swift",
+        "/workspaces/shidd/Sources/PrivacyShieldCore/TrackerBlocker.swift"
+      ],
+      "tempsPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.PrivacyShieldCoreTests-debug.module" : {
+      "executable" : "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "fileList" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/sources",
+      "importPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Tests/PrivacyShieldCoreTests/AuditAndQuarantineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Tests/PrivacyShieldCoreTests/PrivacyShieldCoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PrivacyShieldCoreTests",
+      "moduleOutputPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.swiftmodule",
+      "objects" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swift.o",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-unknown-linux-gnu",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j2",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-g",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "shidd",
+        "-Xcc",
+        "-fno-omit-frame-pointer"
+      ],
+      "outputFileMapPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/workspaces/shidd/Tests/PrivacyShieldCoreTests/AuditAndQuarantineTests.swift",
+        "/workspaces/shidd/Tests/PrivacyShieldCoreTests/PrivacyShieldCoreTests.swift"
+      ],
+      "tempsPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.PrivacyShieldPackageDiscoveredTests-debug.module" : {
+      "executable" : "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "fileList" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/sources",
+      "importPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PrivacyShieldPackageDiscoveredTests",
+      "moduleOutputPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.swiftmodule",
+      "objects" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.swift.o",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-unknown-linux-gnu",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j2",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-g",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "shidd",
+        "-Xcc",
+        "-fno-omit-frame-pointer"
+      ],
+      "outputFileMapPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift"
+      ],
+      "tempsPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.PrivacyShieldPackageTests-debug.module" : {
+      "executable" : "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "fileList" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/sources",
+      "importPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "PrivacyShieldPackageTests",
+      "moduleOutputPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.swiftmodule",
+      "objects" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-unknown-linux-gnu",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j2",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-g",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "shidd",
+        "-Xcc",
+        "-fno-omit-frame-pointer"
+      ],
+      "outputFileMapPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "PrivacyShieldCore" : [
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "-module-name",
+      "PrivacyShieldCore",
+      "-package-name",
+      "shidd",
+      "-incremental",
+      "-c",
+      "/workspaces/shidd/Sources/PrivacyShieldCore/AuditLog.swift",
+      "/workspaces/shidd/Sources/PrivacyShieldCore/PermissionAudit.swift",
+      "/workspaces/shidd/Sources/PrivacyShieldCore/Quarantine.swift",
+      "/workspaces/shidd/Sources/PrivacyShieldCore/TrackerBlocker.swift",
+      "-I",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "-target",
+      "x86_64-unknown-linux-gnu",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j2",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-g",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "shidd",
+      "-Xcc",
+      "-fno-omit-frame-pointer",
+      "-driver-use-frontend-path",
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc"
+    ],
+    "PrivacyShieldCoreTests" : [
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "-module-name",
+      "PrivacyShieldCoreTests",
+      "-package-name",
+      "shidd",
+      "-incremental",
+      "-c",
+      "/workspaces/shidd/Tests/PrivacyShieldCoreTests/AuditAndQuarantineTests.swift",
+      "/workspaces/shidd/Tests/PrivacyShieldCoreTests/PrivacyShieldCoreTests.swift",
+      "-I",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "-target",
+      "x86_64-unknown-linux-gnu",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j2",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-g",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "shidd",
+      "-Xcc",
+      "-fno-omit-frame-pointer",
+      "-driver-use-frontend-path",
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc"
+    ],
+    "PrivacyShieldPackageDiscoveredTests" : [
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "-module-name",
+      "PrivacyShieldPackageDiscoveredTests",
+      "-package-name",
+      "shidd",
+      "-incremental",
+      "-c",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift",
+      "-I",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "-target",
+      "x86_64-unknown-linux-gnu",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j2",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-g",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "shidd",
+      "-Xcc",
+      "-fno-omit-frame-pointer",
+      "-driver-use-frontend-path",
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc"
+    ],
+    "PrivacyShieldPackageTests" : [
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc",
+      "-module-name",
+      "PrivacyShieldPackageTests",
+      "-package-name",
+      "shidd",
+      "-incremental",
+      "-c",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift",
+      "-I",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug",
+      "-target",
+      "x86_64-unknown-linux-gnu",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j2",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-g",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "shidd",
+      "-Xcc",
+      "-fno-omit-frame-pointer",
+      "-driver-use-frontend-path",
+      "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "PrivacyShieldCore" : [
+
+    ],
+    "PrivacyShieldCoreTests" : [
+      "PrivacyShieldCore"
+    ],
+    "PrivacyShieldPackageDiscoveredTests" : [
+      "PrivacyShieldCoreTests",
+      "PrivacyShieldCore"
+    ],
+    "PrivacyShieldPackageTests" : [
+      "PrivacyShieldPackageDiscoveredTests",
+      "PrivacyShieldCoreTests",
+      "PrivacyShieldCore"
+    ]
+  },
+  "testDiscoveryCommands" : {
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swift.o"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift"
+        }
+      ]
+    }
+  },
+  "testEntryPointCommands" : {
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.swiftmodule"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "writeCommands" : {
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/AuditLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/PermissionAudit.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/Quarantine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Sources/PrivacyShieldCore/TrackerBlocker.swift"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/sources"
+    },
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Tests/PrivacyShieldCoreTests/AuditAndQuarantineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/Tests/PrivacyShieldCoreTests/PrivacyShieldCoreTests.swift"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/sources"
+    },
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/PrivacyShieldCoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.derived/all-discovered-tests.swift"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/sources"
+    },
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/sources"
+    },
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/AuditLog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/PermissionAudit.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/PrivacyShieldCore.swiftmodule.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/Quarantine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCore.build/TrackerBlocker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/AuditAndQuarantineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldCoreTests.build/PrivacyShieldCoreTests.swiftmodule.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/PrivacyShieldPackageDiscoveredTests.swiftmodule.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageDiscoveredTests.build/all-discovered-tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/PrivacyShieldPackageTests.swiftmodule.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.build/runner.swift.o"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/PrivacyShieldPackageTests.product/Objects.LinkFileList"
+    },
+    "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/opt/swift-5.10.1-RELEASE-ubuntu22.04/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/workspaces/shidd/.build/x86_64-unknown-linux-gnu/debug/swift-version-6DD4792143108706.txt"
+    }
+  }
+}
