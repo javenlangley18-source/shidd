@@ -71,8 +71,7 @@ public actor QuarantineManager: Sendable {
 
     /// Restore quarantined data (revoke quarantine). Returns the updated request.
     public func restore(requestId: UUID, actorId: String) async -> QuarantineRequest? {
-        guard var req = requestsById[requestId] else { return nil }
-        guard req.state == .quarantined else { return req }
+        guard var req = requestsById[requestId], req.state == .quarantined else { return nil }
         req.state = .restored
         requestsById[requestId] = req
         await AuditLog.shared.record(actor: actorId, action: "quarantine_restored", target: req.resourceId, details: nil)
