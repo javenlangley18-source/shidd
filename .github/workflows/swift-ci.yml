@@ -32,7 +32,7 @@ jobs:
           TMP="$RUNNER_TEMP/swift.tar.gz"
           curl -fSL "$SWIFT_URL" -o "$TMP"
           sudo tar -xzf "$TMP" -C /opt
-          DIR=$(tar -tzf "$TMP" | head -1 | cut -f1 -d"/")
+          DIR="swift-${SWIFT_VERSION}-RELEASE-ubuntu22.04"
           sudo ln -sfn "/opt/$DIR" /opt/swift
           echo "PATH=/opt/swift/usr/bin:$PATH" >> "$GITHUB_ENV"
 
