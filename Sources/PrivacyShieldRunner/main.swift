@@ -61,7 +61,27 @@ func readLine(fd: Int32) -> String? {
 
 func handleClient(fd: Int32) {
     guard let line = readLine(fd: fd) else { return }
-    let parts = line.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: false).map(String.init)
+
+    // If PRIVACY_SHIELD_SECRET is set, require each command to be prefixed with the secret
+    // e.g. "<SECRET> LIST_REQUESTS". If not set, no authentication is required.
+    let envSecret = ProcessInfo.processInfo.environment["PRIVACY_SHIELD_SECRET"]?.trimmingCharacters(in: .whitespacesAndNewlines)
+    var cmdLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
+    if let secret = envSecret, !secret.isEmpty {
+        if cmdLine == secret {
+            let resp = "ERR no command provided after secret\n"
+            _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+            return
+        }
+        if cmdLine.hasPrefix(secret + " ") {
+            cmdLine = String(cmdLine.dropFirst(secret.count + 1))
+        } else {
+            let resp = "ERR auth failed\n"
+            _ = resp.withCString { ptr in write(fd, ptr, strlen(ptr)) }
+            return
+        }
+    }
+
+    let parts = cmdLine.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: false).map(String.init)
     let cmd = parts.first ?? ""
     Task {
         var response = ""
